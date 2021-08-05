@@ -1,30 +1,34 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {fetchPersons} from "../store/action-creators/persons";
-import {PersonsActionTypes} from "../types/persons";
+import React, {useCallback, useEffect, useState} from "react";
+import { useDispatch } from "react-redux";
+import { fetchPersons } from "../API/persons";
+import { PersonsActionTypes } from "../types/persons";
 
-function MyInput(){
-    const [value, setValue] = useState(0);
+const MyInput = () => {
+    const [value, setValue] = useState<number>(0);
     const dispatch = useDispatch();
 
-    const handleFetchPersons = () => {
+    const handleFetchPersons = useCallback(() => {
         dispatch({type: PersonsActionTypes.CLEAR_PERSONS});
         if (value > 0) {
             for (let i=1; i<=value; i++ ) {
                 dispatch(fetchPersons())
             }
         }
-    };
+    },[value]);
 
-    if(value < 0) setValue(0);
+    useEffect(() => {
+        if (value < 0) setValue(0);
+    }, [value]);
 
     return (
-        <div>
+        <>
             <p> Сколько запросов на рандомных персонажев сделать? </p>
-            <input type="number" value={value} onChange={(e)=>setValue(Number(e.target.value))}/>
-            <button onClick={()=>handleFetchPersons()}>Отобразить</button>
-        </div>
+            <input type="number" value={value} onChange={({target})=>setValue(Number(target.value))}/>
+            <button onClick={handleFetchPersons}>Отобразить</button>
+        </>
     )
-}
+};
+
+MyInput.displayName = "MyInput";
 
 export default MyInput;

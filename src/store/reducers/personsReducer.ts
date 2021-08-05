@@ -1,4 +1,4 @@
-import {PersonsAction, PersonsActionTypes} from "../../types/persons";
+import { PersonsAction, PersonsActionTypes } from "../../types/persons";
 
 const personsInitialState:any = {
     data: []
@@ -11,8 +11,7 @@ export const personsReducer = (state = personsInitialState, action: PersonsActio
         case PersonsActionTypes.FETCH_PERSONS_SUCCESS:
             return {...state, data: [...state.data, action.payload]};
         case PersonsActionTypes.FETCH_PERSONS_ERROR:
-            const newData = [...state.data, action.payload];
-            return {...state, data: newData};
+            return {...state, data: [...state.data, action.payload]};
         case PersonsActionTypes.CLEAR_PERSONS:
             return {data: []};
         default:

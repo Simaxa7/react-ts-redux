@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 import UserList from "./UserList";
 import MyInput from "./MyInput";
 
-function App() {
-  return (
+const App = () => (
     <div className="App">
         <h1>React ts redux</h1>
         <hr/>
@@ -15,6 +14,7 @@ function App() {
         <UserList/>
     </div>
   );
-}
+
+App.displayName = "App";
 
 export default App;
