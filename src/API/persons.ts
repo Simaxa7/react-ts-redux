@@ -8,8 +8,10 @@ export const fetchPersons = () => async (dispatch:Dispatch) => {
     const idForImg = randomPerson();
     try {
         const response = await axios.get(`${PERSONS_BASE_URL}${idForImg}/`);
-        console.log('response data', response.data);
-
+        // const response = {
+        //     data: {}
+        // };
+        // console.log('response data', response.data);
         dispatch ({
             type: PersonsActionTypes.FETCH_PERSONS_SUCCESS,
             payload: {
